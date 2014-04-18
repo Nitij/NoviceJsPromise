@@ -1,7 +1,8 @@
 ﻿(function (w, undefined) {
 
-    var RESOLVED_KEYWORD = 'resolved',  //constant for resolved state
-        REJECTED_KEYWORD = 'rejected';  //constant for rejected state
+    var RESOLVED_KEYWORD = 'resolved',                                  //constant for resolved state
+        REJECTED_KEYWORD = 'rejected',                                  //constant for rejected state
+        PARAM_NOT_FUNCTION_ERROR = 'Passed parameter is not a function';//error text when passed parameter is not a functon
 
     //function to find out if the passed parameter is function or not
     function isFunc(f) {
