@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>NoviceJSPromise Sample</title>
+    <script type="text/javascript" src="NovicePromise.js"></script>
+</head>
+<body>
+
+    <script>       
+
+        //first create a new deferred object
+        var d = new Deferred();
+
+        d.when(call1)
+            .then(call2, handleError)
+            .then(call3, handleError)
+            .then(call4, handleError)
+            .done(finalCall);
+
+        function call1() {
+            delayedExecution(function () { console.log('Call 1 executed'); }, 1000, 'Call1');
+        }
+
+        function call2(data) {
+            delayedExecution(function () { console.log('Call 2 executed'); }, 2000, data + ' Call2');
+        }
+
+        function call3(data) {
+            delayedExecution(function () { console.log('Call 3 executed'); }, 2000, data + ' Call3');
+        }
+
+        function call4(data) {
+            delayedExecution(function () { console.log('Call 4 executed'); }, 3000, data + ' Call4');
+        }
+
+        function finalCall(data) {
+            console.log(data);
+        }
+
+        //function to delay execution of a code and call the deferred
+        //object's resolved or rejected callbacks
+        function delayedExecution(func, timeOut, params) {
+            setTimeout(function () {
+                try {
+                    func();
+                    d.resolvedFunc(params);
+                }
+                catch (e) {
+                    d.rejectedFunc(e);
+                }
+            }, timeOut);
+        }
+
+        //function to handle error
+        function handleError(e) {
+            console.log('Unfortunately there is some error: ' + e);
+        }
+    </script>
+</body>
+</html>
